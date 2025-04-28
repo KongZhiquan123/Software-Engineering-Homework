@@ -1,0 +1,101 @@
+<h1>{{ 'settings.register.title' | translate }}</h1>
+
+<div class="row mb-20">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">{{ 'settings.register.pending_requests' | translate }}</div>
+      </div>
+      <div class="panel-body">
+        <div ng-if="loading">
+          <p class="text-center"><span class="fas fa-spinner fa-spin"></span> {{ 'loading' | translate }}</p>
+        </div>
+        
+        <div ng-if="!loading && pendingRequests.length == 0">
+          <p>{{ 'settings.register.no_pending' | translate }}</p>
+        </div>
+        
+        <div ng-if="!loading && pendingRequests.length > 0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{{ 'settings.register.username' | translate }}</th>
+                <th>{{ 'settings.register.email' | translate }}</th>
+                <th>{{ 'settings.register.create_date' | translate }}</th>
+                <th>{{ 'settings.register.ip_address' | translate }}</th>
+                <th style="width: 15%;">{{ 'settings.register.actions' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="request in pendingRequests">
+                <td>{{ request.username }}</td>
+                <td>{{ request.email }}</td>
+                <td>{{ request.create_date | date:'medium' }}</td>
+                <td>{{ request.ip_address }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-xs" ng-click="approve(request)">
+                      <span class="fas fa-check"></span> {{ 'settings.register.approve' | translate }}
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="reject(request)">
+                      <span class="fas fa-times"></span> {{ 'settings.register.reject' | translate }}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">{{ 'settings.register.history' | translate }}</div>
+      </div>
+      <div class="panel-body">
+        <div ng-if="loading">
+          <p class="text-center"><span class="fas fa-spinner fa-spin"></span> {{ 'loading' | translate }}</p>
+        </div>
+        
+        <div ng-if="!loading && historyRequests.length == 0">
+          <p>{{ 'settings.register.no_history' | translate }}</p>
+        </div>
+        
+        <div ng-if="!loading && historyRequests.length > 0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{{ 'settings.register.username' | translate }}</th>
+                <th>{{ 'settings.register.email' | translate }}</th>
+                <th>{{ 'settings.register.create_date' | translate }}</th>
+                <th>{{ 'settings.register.status' | translate }}</th>
+                <th>{{ 'settings.register.status_date' | translate }}</th>
+                <th>{{ 'settings.register.status_user' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="request in historyRequests">
+                <td>{{ request.username }}</td>
+                <td>{{ request.email }}</td>
+                <td>{{ request.create_date | date:'medium' }}</td>
+                <td>
+                  <span class="label" ng-class="{
+                    'label-success': request.status == 'APPROVED',
+                    'label-danger': request.status == 'REJECTED'
+                  }">{{ 'settings.register.status_' + request.status.toLowerCase() | translate }}</span>
+                </td>
+                <td>{{ request.status_date | date:'medium' }}</td>
+                <td>{{ request.status_username }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
