@@ -22,6 +22,10 @@
         <a class="list-group-item" ui-sref-active="{ active: 'settings.inbox.**' }" href="#/settings/inbox">{{ 'settings.menu_inbox' | translate }}</a>
         <a class="list-group-item" ui-sref-active="{ active: 'settings.ldap.**' }" href="#/settings/ldap">{{ 'settings.menu_ldap' | translate }}</a>
         <a class="list-group-item" ui-sref-active="{ active: 'settings.monitoring.**' }" href="#/settings/monitoring">{{ 'settings.menu_monitoring' | translate }}</a>
+        <a class="list-group-item" ui-sref-active="{ active: 'settings.register.**' }" href="#/settings/register" ng-if="userInfo.base_functions.indexOf('ADMIN') != -1">
+          <span class="fas fa-user-plus"></span>
+          <span translate="settings.register.title"></span>
+        </a>
       </ul>
     </div>
   </div>
@@ -29,10 +33,5 @@
   <div class="col-md-9 settings-content">
     <div ui-view="settings"></div>
   </div>
-  <li ng-class="{ active: $uiRoute }" data-ng-class="{'active' : $state.includes('settings.register')}" ng-if="userInfo.base_functions.indexOf('ADMIN') != -1">
-    <a href="#/settings/register">
-      <span class="fas fa-user-plus"></span>
-      <span translate="settings.register.title"></span>
-    </a>
-  </li>
+
 </div>

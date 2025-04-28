@@ -13,7 +13,7 @@ create cached table T_DOCUMENT_TAG ( DOT_ID_C varchar(36) not null, DOT_IDDOCUME
 create cached table T_ACL ( ACL_ID_C varchar(36) not null, ACL_PERM_C varchar(30) not null, ACL_SOURCEID_C varchar(36) not null, ACL_TARGETID_C varchar(36) not null, ACL_DELETEDATE_D datetime, primary key (ACL_ID_C) );
 create cached table T_SHARE ( SHA_ID_C varchar(36) not null, SHA_NAME_C varchar(36), SHA_CREATEDATE_D datetime, SHA_DELETEDATE_D datetime, primary key (SHA_ID_C) );
 create cached table T_AUDIT_LOG ( LOG_ID_C varchar(36) not null, LOG_IDENTITY_C varchar(36) not null, LOG_CLASSENTITY_C varchar(50) not null, LOG_TYPE_C varchar(50) not null, LOG_MESSAGE_C varchar(1000), LOG_CREATEDATE_D datetime, primary key (LOG_ID_C) );
-
+create cached table T_REGISTRATION_REQUEST (RGR_ID_C varchar(36) not null, RGR_USERNAME_C varchar(50) not null, RGR_EMAIL_C varchar(100) not null, RGR_PASSWORD_C varchar(100) not null, RGR_CREATEDATE_D datetime not null, RGR_STATUS_C varchar(10) not null, RGR_IPADDRESS_C varchar(45), RGR_STATUSDATE_D datetime, RGR_STATUSUSERID_C varchar(36), primary key (RGR_ID_C));
 alter table T_AUTHENTICATION_TOKEN add constraint FK_AUT_IDUSER_C foreign key (AUT_IDUSER_C) references T_USER (USE_ID_C) on delete restrict on update restrict;
 alter table T_DOCUMENT add constraint FK_DOC_IDUSER_C foreign key (DOC_IDUSER_C) references T_USER (USE_ID_C) on delete restrict on update restrict;
 alter table T_FILE add constraint FK_FIL_IDDOC_C foreign key (FIL_IDDOC_C) references T_DOCUMENT (DOC_ID_C) on delete restrict on update restrict;
@@ -33,6 +33,9 @@ create index IDX_ACL_SOURCEID_C on T_ACL (ACL_SOURCEID_C);
 create index IDX_ACL_TARGETID_C on T_ACL (ACL_TARGETID_C);
 create index IDX_LOG_IDENTITY_C on T_AUDIT_LOG (LOG_IDENTITY_C);
 
+create index IDX_RGR_STATUS_C on T_REGISTRATION_REQUEST (RGR_STATUS_C);
+create index IDX_RGR_USERNAME_C on T_REGISTRATION_REQUEST (RGR_USERNAME_C);
+create index IDX_RGR_STATUSUSERID_C on T_REGISTRATION_REQUEST (RGR_STATUSUSERID_C);
 insert into T_CONFIG(CFG_ID_C, CFG_VALUE_C) values('DB_VERSION', '0');
 insert into T_CONFIG(CFG_ID_C, CFG_VALUE_C) values('LUCENE_DIRECTORY_STORAGE', 'FILE');
 insert into T_BASE_FUNCTION(BAF_ID_C) values('ADMIN');

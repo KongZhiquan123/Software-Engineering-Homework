@@ -11,7 +11,10 @@ angular.module('docs').controller('SettingsRegister', function($scope, Restangul
    * Load registration requests.
    */
   $scope.loadRequests = function() {
-    Restangular.one('registrationrequest').get().then(function(data) {
+    Restangular.one('registrationrequest').get({
+      sortColumn: 3,
+      asc: false
+    }).then(function(data) {
       $scope.loading = false;
       
       // Separate pending from processed requests

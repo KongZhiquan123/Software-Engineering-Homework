@@ -106,7 +106,7 @@ public class RegistrationRequestDao {
         Map<String, Object> parameterMap = new HashMap<>();
         List<String> criteriaList = new ArrayList<>();
 
-        StringBuilder sb = new StringBuilder("select r.RGR_ID_C, r.RGR_USERNAME_C, r.RGR_EMAIL_C, r.RGR_CREATEDATE_D, r.RGR_STATUS_C, r.RGR_IPADDRESS_C, r.RGR_STATUSDATE_D, r.RGR_STATUSUSERID_C, u.USE_USERNAME_C ");
+        StringBuilder sb = new StringBuilder("select r.RGR_ID_C as c0, r.RGR_USERNAME_C as c1, r.RGR_EMAIL_C as c2, r.RGR_CREATEDATE_D as c3, r.RGR_STATUS_C as c4, r.RGR_IPADDRESS_C as c5, r.RGR_STATUSDATE_D as c6, r.RGR_STATUSUSERID_C as c7, u.USE_USERNAME_C as c8 ");
         sb.append(" from T_REGISTRATION_REQUEST r ");
         sb.append(" left join T_USER u on u.USE_ID_C = r.RGR_STATUSUSERID_C ");
 
