@@ -1,0 +1,65 @@
+<h1>
+    <span translate="settings.useractivity.title"></span>
+  </h1>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="pull-right">
+            <div class="btn-group" uib-dropdown>
+              <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{ selectedPeriod }} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+                <li><a href ng-click="setPeriod('day')" translate="settings.useractivity.period_day"></a></li>
+                <li><a href ng-click="setPeriod('week')" translate="settings.useractivity.period_week"></a></li>
+                <li><a href ng-click="setPeriod('month')" translate="settings.useractivity.period_month"></a></li>
+              </ul>
+            </div>
+          </div>
+          <h3 class="panel-title" translate="settings.useractivity.activity_overview"></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h4 translate="settings.useractivity.activity_by_user"></h4>
+              <div class="chart-container">
+                <canvas id="userActivityChart"></canvas>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h4 translate="settings.useractivity.activity_by_type"></h4>
+              <div class="chart-container">
+                <canvas id="activityTypeChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" translate="settings.useractivity.document_progress"></h3>
+        </div>
+        <div class="panel-body">
+          <div class="font-size: 13px;margin-bottom: 20px" ng-if="ganttTasks.length > 0">
+            <strong translate="settings.useractivity.document_age"></strong>:
+            <span class="age-indicator" style="background-color: #4285f4;"></span> 
+            <span translate="settings.useractivity.recent"></span>
+            <span class="age-indicator" style="background-color: #0f9d58;"></span> 
+            <span translate="settings.useractivity.this_month"></span>
+            <span class="age-indicator" style="background-color: #f4b400;"></span> 
+            <span translate="settings.useractivity.quarter"></span>
+            <span class="age-indicator" style="background-color: #db4437;"></span> 
+            <span translate="settings.useractivity.older"></span>
+          </div>
+          <div style="height: 10px;"></div>
+          <div id="ganttChart" style="height: 500px; width: 100%; overflow: auto;" ng-if="ganttTasks.length > 0"></div>
+          <div class="text-center" ng-if="ganttTasks.length === 0">
+            <p translate="settings.useractivity.no_activities"></p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>

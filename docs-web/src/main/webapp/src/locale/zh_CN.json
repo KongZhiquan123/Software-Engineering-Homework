@@ -263,6 +263,27 @@
     "menu_configuration": "配置",
     "menu_inbox": "收件箱扫描",
     "menu_server_logs": "服务器日志",
+    "menu_user_activity": "用户活动",
+    "useractivity": {
+      "title": "用户活动仪表板",
+      "activity_overview": "活动概览",
+      "activity_by_user": "按用户划分活动",
+      "activity_by_type": "按类型划分活动",
+      "document_progress": "文档进度（甘特图）",
+      "period_day": "过去24小时",
+      "period_week": "本周",
+      "period_month": "本月",
+      "activity_count": "活动计数",
+      "search_user": "搜索用户...",
+      "no_activities": "没有可显示的文档活动",
+      "untitled": "无标题文档",
+      "recent": "最近",
+      "this_month": "本月",
+      "quarter": "本季度",
+      "older": "更早的文档",
+      "document_age": "文档创建时间"
+    },
+    
     "register": {
       "title": "注册申请",
       "pending_requests": "待处理申请",
@@ -482,7 +503,12 @@
       "Tag": "标签",
       "User": "用户",
       "RouteModel": "工作流程",
-      "Route": "工作流程"
+      "Route": "工作流程",
+      "log_create": "创建",
+      "log_update": "更新",
+      "log_delete": "删除",
+      "log_approve": "批准",
+      "log_validate": "验证"
     },
     "selectrelation": {
       "typeahead": "请输入一个文档名称"

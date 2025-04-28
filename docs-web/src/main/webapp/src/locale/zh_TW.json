@@ -247,6 +247,23 @@
     "menu_configuration": "配置",
     "menu_inbox": "收件箱掃描",
     "menu_server_logs": "服務器日誌",
+    "menu_user_activity": "用戶活動",
+    "register": {
+      "title": "用戶註冊"
+    },
+    "useractivity": {
+      "title": "用戶活動儀表板",
+      "activity_overview": "活動概覽",
+      "activity_by_user": "按用戶劃分活動",
+      "activity_by_type": "按類型劃分活動",
+      "document_progress": "文檔進度（甘特圖）",
+      "period_day": "過去24小時",
+      "period_week": "上週",
+      "period_month": "上個月",
+      "activity_count": "活動計數",
+      "search_user": "搜索用戶...",
+      "no_activities": "沒有可顯示的文檔活動"
+    },
     "user": {
       "title": "用戶 <small>管理</small>",
       "add_user": "添加用戶",

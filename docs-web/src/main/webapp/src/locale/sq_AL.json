@@ -281,6 +281,23 @@
     "menu_ldap": "Autentifikimi LDAP",
     "menu_metadata": "Meta të dhëna të personalizuara",
     "menu_monitoring": "Monitorimi",
+    "menu_user_activity": "Aktiviteti i përdoruesve",
+    "register": {
+      "title": "Regjistrimi i përdoruesve"
+    },
+    "useractivity": {
+      "title": "Paneli i aktivitetit të përdoruesve",
+      "activity_overview": "Përmbledhje e aktivitetit",
+      "activity_by_user": "Aktiviteti sipas përdoruesit",
+      "activity_by_type": "Aktiviteti sipas llojit",
+      "document_progress": "Progresi i dokumenteve (Grafiku Gantt)",
+      "period_day": "24 orët e fundit",
+      "period_week": "Java e fundit",
+      "period_month": "Muaji i fundit",
+      "activity_count": "Numri i aktiviteteve",
+      "search_user": "Kërko përdorues...",
+      "no_activities": "Nuk ka aktivitete dokumentesh për të shfaqur"
+    },
     "ldap": {
       "title": "Autentifikimi LDAP",
       "enabled": "Aktivizo vërtetimin LDAP",
