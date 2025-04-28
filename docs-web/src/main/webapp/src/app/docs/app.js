@@ -83,6 +83,15 @@ angular.module('docs',
         }
       }
     })
+    .state('settings.useractivity', {
+      url: '/useractivity',
+      views: {
+        'settings': {
+          templateUrl: 'partial/docs/settings.useractivity.html',
+          controller: 'SettingsUserActivity'
+        }
+      }
+    })
     .state('settings.register', {
       url: '/register',
       views: {
