@@ -37,6 +37,8 @@ public class AuditLogResource extends BaseResource {
      * @apiName GetAuditlog
      * @apiGroup Auditlog
      * @apiParam {String} [document] Document ID
+     * @apiParam {Number} [limit=20] Maximum number of logs to return
+     * @apiParam {Boolean} [asc=false] If true, sort in ascending order
      * @apiSuccess {String} total Total number of logs
      * @apiSuccess {Object[]} logs List of logs
      * @apiSuccess {String} logs.id ID
@@ -54,14 +56,21 @@ public class AuditLogResource extends BaseResource {
      * @return Response
      */
     @GET
-    public Response list(@QueryParam("document") String documentId) {
+    public Response list(
+            @QueryParam("document") String documentId,
+            @QueryParam("limit") Integer limit,
+            @QueryParam("asc") Boolean asc) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
         
+        // Set default values
+        int pageSize = limit != null ? limit : 20;
+        boolean ascending = asc != null ? asc : false;
+        
         // On a document or a user?
-        PaginatedList<AuditLogDto> paginatedList = PaginatedLists.create(20, 0);
-        SortCriteria sortCriteria = new SortCriteria(1, false);
+        PaginatedList<AuditLogDto> paginatedList = PaginatedLists.create(pageSize, 0);
+        SortCriteria sortCriteria = new SortCriteria(1, ascending);
         AuditLogCriteria criteria = new AuditLogCriteria();
         if (Strings.isNullOrEmpty(documentId)) {
             // Search logs for a user

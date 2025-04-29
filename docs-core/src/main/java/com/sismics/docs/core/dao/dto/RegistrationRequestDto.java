@@ -3,7 +3,7 @@ package com.sismics.docs.core.dao.dto;
 /**
  * Registration request DTO.
  *
- * @author YourName
+ * @author kzq
  */
 public class RegistrationRequestDto {
     /**

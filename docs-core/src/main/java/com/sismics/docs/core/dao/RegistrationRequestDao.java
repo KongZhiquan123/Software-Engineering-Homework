@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 /**
  * Registration request DAO.
  * 
- * @author YourName
+ * @author kzq
  */
 public class RegistrationRequestDao {
     /**

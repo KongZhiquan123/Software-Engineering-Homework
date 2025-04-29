@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Registration request entity.
  * 
- * @author YourName
+ * @author kzq
  */
 @Entity
 @Table(name = "T_REGISTRATION_REQUEST")

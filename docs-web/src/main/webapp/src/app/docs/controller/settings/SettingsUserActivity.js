@@ -5,7 +5,7 @@
  */
 angular.module('docs').controller('SettingsUserActivity', function($scope, Restangular, $translate) {
   // Default period is one week
-  $scope.selectedPeriod = $translate.instant('settings.useractivity.period_week');
+  $scope.selectedPeriod = $translate.instant('settings.useractivity.recent');
   $scope.ganttTasks = [];
 
   // Load charts library
@@ -27,7 +27,7 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
   // Load Gantt library
   var loadGanttChart = function() {
     if (typeof google !== 'undefined' && typeof google.charts !== 'undefined') {
-      initGanttChart();
+      setTimeout(initGanttChart, 1000);
       return;
     }
     
@@ -100,7 +100,6 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
    */
   var initGanttChart = function() {
     if (!$scope.ganttTasks || !$scope.ganttTasks.length) return;
-    
     var container = document.getElementById('ganttChart');
     var chart = new google.visualization.Gantt(container);
     
@@ -148,7 +147,7 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
         null,
         task.percentComplete,
         null,
-        barColor  // Add the color as styling information
+        barColor
       ];
     });
     data.addColumn('string', 'Style');
@@ -207,15 +206,15 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
    */
   $scope.setPeriod = function(period) {
     switch(period) {
-      case 'day':
-        $scope.selectedPeriod = $translate.instant('settings.useractivity.period_day');
+      case 'quarter':
+        $scope.selectedPeriod = $translate.instant('settings.useractivity.quarter');
         break;
       case 'month':
-        $scope.selectedPeriod = $translate.instant('settings.useractivity.period_month');
+        $scope.selectedPeriod = $translate.instant('settings.useractivity.this_month');
         break;
       default:
-        $scope.selectedPeriod = $translate.instant('settings.useractivity.period_week');
-        period = 'week';
+        $scope.selectedPeriod = $translate.instant('settings.useractivity.recent');
+        period = 'day';
     }
     
     loadUserActivityData(period);
@@ -226,26 +225,46 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
    */
   var loadUserActivityData = function(period) {
     Restangular.one('auditlog').get({
-      limit: 1000,
-      period: period
+      documentId: null,
+      limit: 100,
+      asc: false,
     }).then(function(data) {
-      processUserActivityData(data.logs);
+      processUserActivityData(data.logs, period);
     });
     
     // Also load document progress data for Gantt chart
-    loadDocumentProgressData(period);
+    loadDocumentProgressData();
   };
   
   /**
    * Process user activity data for charts.
    */
-  var processUserActivityData = function(logs) {
-    // Group by user
+  var processUserActivityData = function(logs, period) {
     var userActivity = {};
-    // Group by activity type
     var activityTypes = {};
     
-    logs.forEach(function(log) {
+    // Define date range based on period
+    var now = new Date();
+    var startDate = new Date();
+    
+    switch(period) {
+      case 'month':
+        startDate.setMonth(now.getMonth() - 1); // Last 30 days
+        break;
+      case 'quarter':
+        startDate.setMonth(now.getMonth() - 3); // Last 90 days
+        break;
+      default: 
+        startDate.setDate(now.getDate() - 1)
+    }
+    
+    // Filter logs based on date
+    var filteredLogs = logs.filter(function(log) {
+      var logDate = new Date(log.create_date);
+      return logDate >= startDate && logDate <= now;
+    });
+    
+    filteredLogs.forEach(function(log) {
       // Count by user
       if (!userActivity[log.username]) {
         userActivity[log.username] = 0;
@@ -271,7 +290,7 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
       labels: Object.keys(activityTypes).map(function(key) {
         var parts = key.split('-');
         return $translate.instant('directive.auditlog.' + parts[0]) + ' - ' + 
-               $translate.instant('directive.auditlog.log_' + parts[1].toLowerCase());
+              $translate.instant('directive.auditlog.log_' + parts[1].toLowerCase());
       }),
       data: Object.values(activityTypes)
     };
@@ -283,9 +302,9 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
   /**
    * Load document progress data for Gantt chart.
    */
-  var loadDocumentProgressData = function(period) {
+  var loadDocumentProgressData = function() {
     Restangular.one('document/list').get({
-      limit: 50,
+      limit: 100,
       sort_column: 3,
       asc: false
     }).then(function(data) {
@@ -406,6 +425,5 @@ angular.module('docs').controller('SettingsUserActivity', function($scope, Resta
     return Math.min(completionScore, maxScore);
   };
 
-  // Initial data load with default period (week)
-  loadUserActivityData('week');
+  loadUserActivityData('recent');
 });

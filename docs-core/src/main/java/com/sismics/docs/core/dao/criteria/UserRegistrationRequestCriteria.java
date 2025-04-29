@@ -3,7 +3,7 @@ package com.sismics.docs.core.dao.criteria;
 /**
  * User registration request criteria.
  *
- * @author You
+ * @author kzq
  */
 public class UserRegistrationRequestCriteria {
     /**
