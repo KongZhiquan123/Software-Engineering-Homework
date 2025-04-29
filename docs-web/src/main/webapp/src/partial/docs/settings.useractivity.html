@@ -42,7 +42,7 @@
           <h3 class="panel-title" translate="settings.useractivity.document_progress"></h3>
         </div>
         <div class="panel-body">
-          <div class="font-size: 13px;margin-bottom: 20px" ng-if="ganttTasks.length > 0">
+          <div style="font-size: 13px;margin-bottom: 20px" ng-if="ganttTasks.length > 0">
             <strong translate="settings.useractivity.document_age"></strong>:
             <span class="age-indicator" style="background-color: #4285f4;"></span> 
             <span translate="settings.useractivity.recent"></span>
@@ -53,7 +53,6 @@
             <span class="age-indicator" style="background-color: #db4437;"></span> 
             <span translate="settings.useractivity.older"></span>
           </div>
-          <div style="height: 10px;"></div>
           <div id="ganttChart" style="height: 500px; width: 100%; overflow: auto;" ng-if="ganttTasks.length > 0"></div>
           <div class="text-center" ng-if="ganttTasks.length === 0">
             <p translate="settings.useractivity.no_activities"></p>
